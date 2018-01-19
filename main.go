@@ -49,9 +49,11 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 		if event.Type == linebot.EventTypeMessage {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
-				_, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do()
-				if err != nil {
-					log.Print(err)
+				if string.Contains(strings.Contains(message.Text,"test") {
+					_, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do()
+					if err != nil {
+						log.Print(err)
+					}
 				}
 			}
 		}
