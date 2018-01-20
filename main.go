@@ -55,7 +55,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 						log.Print(err)
 					}
 				} else if strings.Contains(message.Text, "aaa") {
-					if _, err = bot.PushMessage(event.Source.UserID, linebot.NewTextMessage("hello")).Do(); err != nil {
+					if _, err = bot.PushMessage(event.Source., linebot.NewTextMessage("hello")).Do(); err != nil {
+						log.Println("PushMessage")
 						log.Print(err)
 					}
 				}
