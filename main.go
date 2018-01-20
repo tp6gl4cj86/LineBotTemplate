@@ -17,11 +17,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
-
-import strings "strings"
 
 var bot *linebot.Client
 
@@ -53,6 +52,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				if strings.Contains(message.Text, "test") {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+						log.Print(err)
+					}
+				} else if strings.Contains(message.Text, "aaa") {
+					if _, err = bot.PushMessage(event.Source.UserID, linebot.NewTextMessage("hello")).Do(); err != nil {
 						log.Print(err)
 					}
 				}
