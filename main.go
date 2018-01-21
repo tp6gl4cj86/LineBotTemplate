@@ -53,8 +53,10 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if strings.Contains(message.Text, "test") {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 						log.Print(err)
+						fmt.Println(err)
 					} else {
-						log.Print(event.Source.GroupID + ", " + event.Source.UserID)
+						log.Print(event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
+						fmt.Println(event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
 					}
 				}
 			}
