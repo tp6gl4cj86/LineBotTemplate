@@ -52,11 +52,9 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			case *linebot.TextMessage:
 				if strings.Contains(message.Text, "test") {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-						log.Print(err)
-						fmt.Println(err)
+						log.Print("NewTextMessage : " + err.Error())
 					} else {
-						log.Print(event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
-						fmt.Println(event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
+						log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
 					}
 				}
 			}
