@@ -53,11 +53,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 				if strings.Contains(message.Text, "test") {
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 						log.Print(err)
-					}
-				} else if strings.Contains(message.Text, "aaa") {
-					if _, err = bot.PushMessage(event.Source.UserID, linebot.NewTextMessage("hello")).Do(); err != nil {
-						log.Println("PushMessage", event.Source.UserID)
-						log.Print(err)
+					} else {
+						log.Print(event.Source.GroupID + ", " + event.Source.UserID)
 					}
 				}
 			}
