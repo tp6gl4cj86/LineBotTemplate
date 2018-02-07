@@ -56,6 +56,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 					} else {
 						log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
 					}
+				} else if message.Text == "下班" {
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("大吉大利，今晚吃雞～")).Do(); err != nil {
+						log.Print("NewTextMessage : " + err.Error())
+					} else {
+						log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
+					}
 				}
 			}
 		}
