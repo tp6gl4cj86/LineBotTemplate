@@ -51,19 +51,20 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 			switch message := event.Message.(type) {
 			case *linebot.TextMessage:
 				if strings.Contains(message.Text, "test") {
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-						log.Print("NewTextMessage : " + err.Error())
-					} else {
-						log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
-					}
+					sendMessage(event, message.Text)
 				} else if message.Text == "下班" {
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage("大吉大利，今晚吃雞～")).Do(); err != nil {
-						log.Print("NewTextMessage : " + err.Error())
-					} else {
-						log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + message.Text)
-					}
+					sendMessage(event, "大吉大利，今晚吃雞～")
 				}
 			}
 		}
+	}
+}
+
+func sendMessage(event *linebot.Event, msg string) {
+	var err error
+	if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(msg)).Do(); err != nil {
+		log.Print("NewTextMessage : " + err.Error())
+	} else {
+		log.Print("NewTextMessage : " + event.Source.GroupID + ", " + event.Source.UserID + ", " + msg)
 	}
 }
